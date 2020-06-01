@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB62DE5B243295D800B873E7 /* SetBackgroundColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62DE5A243295D800B873E7 /* SetBackgroundColorsView.swift */; };
+		EBA8D523248558E80040031D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8D522248558E80040031D /* Helper.swift */; };
 		EBD32A1E2430CEED00853E6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD32A1D2430CEED00853E6A /* AppDelegate.swift */; };
 		EBD32A202430CEED00853E6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD32A1F2430CEED00853E6A /* SceneDelegate.swift */; };
 		EBD32A222430CEED00853E6A /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD32A212430CEED00853E6A /* DrawingViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		EB62DE5A243295D800B873E7 /* SetBackgroundColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBackgroundColorsView.swift; sourceTree = "<group>"; };
+		EBA8D522248558E80040031D /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		EBD32A1A2430CEED00853E6A /* App_SimpleCanvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App_SimpleCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD32A1D2430CEED00853E6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBD32A1F2430CEED00853E6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				EBD32A382432442B00853E6A /* UIButton_extension.swift */,
 				EB62DE5A243295D800B873E7 /* SetBackgroundColorsView.swift */,
+				EBA8D522248558E80040031D /* Helper.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				EBD32A1E2430CEED00853E6A /* AppDelegate.swift in Sources */,
 				EBD32A372430CF8400853E6A /* Canvas.swift in Sources */,
 				EBD32A202430CEED00853E6A /* SceneDelegate.swift in Sources */,
+				EBA8D523248558E80040031D /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,8 @@
 
 import UIKit
 
-//configurating buttons for background colors
+//MARK: configurating buttons for background colors
+
 class SetBackgroundColorsView: UIView {
 	
 	lazy var buttonColor1 = configColorButton()
@@ -45,13 +46,9 @@ class SetBackgroundColorsView: UIView {
 		
 		firstColorsStackView.distribution = .equalSpacing
 		secondColorsStackView.distribution = .equalSpacing
-		addSubview(label)
-		addSubview(firstColorsStackView)
-		addSubview(secondColorsStackView)
-		
-		label.translatesAutoresizingMaskIntoConstraints = false
-		firstColorsStackView.translatesAutoresizingMaskIntoConstraints = false
-		secondColorsStackView.translatesAutoresizingMaskIntoConstraints = false
+
+		Helper.addSubviews(to: self, subviews: [label, firstColorsStackView, secondColorsStackView])
+		Helper.tamicOff(forSubviews: [label, firstColorsStackView, secondColorsStackView])
 		
 		NSLayoutConstraint.activate([
 			label.topAnchor.constraint(equalTo: topAnchor, constant: 5),
@@ -75,23 +72,19 @@ class SetBackgroundColorsView: UIView {
 		firstColorsStackView.layoutIfNeeded()
 		secondColorsStackView.layoutIfNeeded()
 		
-		buttonColor1.layer.cornerRadius = firstColorsStackView.frame.height / 2
-		buttonColor2.layer.cornerRadius = firstColorsStackView.frame.height / 2
-		buttonColor3.layer.cornerRadius = firstColorsStackView.frame.height / 2
-		buttonColor4.layer.cornerRadius = firstColorsStackView.frame.height / 2
-		buttonColor5.layer.cornerRadius = secondColorsStackView.frame.height / 2
-		buttonColor6.layer.cornerRadius = secondColorsStackView.frame.height / 2
-		buttonColor7.layer.cornerRadius = secondColorsStackView.frame.height / 2
-		buttonColor8.layer.cornerRadius = secondColorsStackView.frame.height / 2
-		
-		NSLayoutConstraint.activate([
-			
-		])
+		setupCornerRadius(forButtons: [buttonColor1, buttonColor2, buttonColor3, buttonColor4], value: firstColorsStackView.frame.height / 2)
+		setupCornerRadius(forButtons: [buttonColor5, buttonColor6, buttonColor7, buttonColor8], value: secondColorsStackView.frame.height / 2)
 		
 	}
 	
+	private func setupCornerRadius(forButtons buttons: [UIButton], value: CGFloat) {
+		for button in buttons {
+			button.layer.cornerRadius = value
+		}
+	}
 	
-	func configColorButton() -> UIButton {
+	
+	private func configColorButton() -> UIButton {
 		let button = BackgroundColorButton(type: .system)
 		button.tintColor = .clear
 		button.layer.borderWidth = 1.5

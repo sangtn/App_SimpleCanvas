@@ -52,9 +52,8 @@ class DrawingViewController: UIViewController {
 		button.addTarget(self, action: #selector(drawOrEraseButtonsTapped), for: .touchUpInside)
 		return button
 	}()
-	let masculineButton: UIButton = {
+	let eraseButton: UIButton = {
 		let button = UIButton(type: .custom)
-//		let image = UIImage(systemName: "cube.box")
 		let image = UIImage(systemName: "bandage")
 		button.tintColor = .darkGray
 		button.setBackgroundImage(image, for: .normal)
@@ -125,7 +124,7 @@ class DrawingViewController: UIViewController {
 		button.addTarget(self, action: #selector(closeToolsViewButtonTapped(_:)), for: .touchUpInside)
 		return button
 	}()
-	lazy var toolsButtonsArray = [pencilButton, masculineButton, lineWidthButton, undoButton, clearButton, shareButton, changeBackgroundButton]
+	lazy var toolsButtonsArray = [pencilButton, eraseButton, lineWidthButton, undoButton, clearButton, shareButton, changeBackgroundButton]
 	var toolsButtonsStackView = UIStackView()
 	let backgroundColorsChooseView = SetBackgroundColorsView(textFont: UIFont.systemFont(ofSize: 17, weight: .medium), button1Color: #colorLiteral(red: 0.6964710762, green: 0.5762614058, blue: 1, alpha: 1), button2Color: #colorLiteral(red: 0.5945423615, green: 0.9970377582, blue: 1, alpha: 1), button3Color: #colorLiteral(red: 0.6286100223, green: 1, blue: 0.647058962, alpha: 1), button4Color: #colorLiteral(red: 0.9367815348, green: 1, blue: 0.5735278212, alpha: 1), button5Color: #colorLiteral(red: 1, green: 0.8438047002, blue: 0.6586926848, alpha: 1), button6Color: #colorLiteral(red: 1, green: 0.5961626766, blue: 0.5962358176, alpha: 1), button7Color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), button8Color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
 	var lineWidthSliderHidden = true
@@ -172,7 +171,7 @@ extension DrawingViewController: UIGestureRecognizerDelegate {
 	
 	fileprivate func setupLayouts() {
 		
-		toolsButtonsStackView = UIStackView(arrangedSubviews: [pencilButton, masculineButton, lineWidthButton, undoButton ,clearButton, changeBackgroundButton, shareButton])
+		toolsButtonsStackView = UIStackView(arrangedSubviews: [pencilButton, eraseButton, lineWidthButton, undoButton ,clearButton, changeBackgroundButton, shareButton])
 		colorButtonsStackView = UIStackView(arrangedSubviews: [redButton, greenButton, blueButton, yellowButton, cyanButton, pinkButton, lightGrayButton, darkGrayButton, blackButton, whiteButton])
 		toolsButtonsStackView.axis = .vertical
 		toolsButtonsStackView.distribution = .equalSpacing
@@ -189,20 +188,9 @@ extension DrawingViewController: UIGestureRecognizerDelegate {
 		lastChoosenButtonColor = blackButton
 		toolsView.addSubview(toolsButtonsStackView)
 		colorsView.addSubview(colorButtonsStackView)
-		view.addSubview(closeColorsViewButton)
-		view.addSubview(lineWidthSlider)
-		view.addSubview(backgroundColorsChooseView)
-		view.addSubview(closeToolsViewButton)
-		view.addSubview(colorsView)
-		view.addSubview(toolsView)
-		closeToolsViewButton.translatesAutoresizingMaskIntoConstraints = false
-		closeColorsViewButton.translatesAutoresizingMaskIntoConstraints = false
-		backgroundColorsChooseView.translatesAutoresizingMaskIntoConstraints = false
-		lineWidthSlider.translatesAutoresizingMaskIntoConstraints = false
-		toolsButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
-		colorButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
-		colorsView.translatesAutoresizingMaskIntoConstraints = false
-		toolsView.translatesAutoresizingMaskIntoConstraints = false
+
+		Helper.addSubviews(to: view, subviews: [closeColorsViewButton, lineWidthSlider, backgroundColorsChooseView, closeToolsViewButton, colorsView, toolsView])
+		Helper.tamicOff(forSubviews: [closeToolsViewButton, closeColorsViewButton, backgroundColorsChooseView, lineWidthSlider, toolsButtonsStackView, colorButtonsStackView, colorsView, toolsView])
 		
 		//colors view constraints
 		NSLayoutConstraint.activate([
@@ -245,7 +233,7 @@ extension DrawingViewController: UIGestureRecognizerDelegate {
 			undoButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
 			clearButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
 			shareButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
-			masculineButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
+			eraseButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
 			changeBackgroundButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
 			pencilButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width),
 			lineWidthButton.heightAnchor.constraint(equalToConstant: toolsButtonsStackView.frame.width)
@@ -423,16 +411,16 @@ extension DrawingViewController {
 	@objc fileprivate func drawOrEraseButtonsTapped(_ sender: UIButton) {
 		if sender == pencilButton {
 			pencilButton.isSelected = true
-			masculineButton.isSelected = false
+			eraseButton.isSelected = false
 			pencilButton.tintColor = .systemRed
-			masculineButton.tintColor = .darkGray
+			eraseButton.tintColor = .darkGray
 			colorButtonTapped(lastChoosenButtonColor)
 			lineWidthSlider.value = lastChoosenLineWidth
 			canvas.setLineWidth(width: CGFloat(lastChoosenLineWidth))
-		} else if sender == masculineButton {
+		} else if sender == eraseButton {
 			pencilButton.isSelected = false
-			masculineButton.isSelected = true
-			masculineButton.tintColor = .systemRed
+			eraseButton.isSelected = true
+			eraseButton.tintColor = .systemRed
 			pencilButton.tintColor = .darkGray
 			lineWidthSlider.value = 12.5
 			canvas.setLineWidth(width: 12.5)
@@ -480,7 +468,7 @@ extension DrawingViewController {
 			canvas.setLineColor(color: sender.backgroundColor!)
 			lastChoosenButtonColor = sender
 		}
-		//nothing to do if choosen masculine
+		//nothing to do if choosen eraser
 	}
 	
 	//handle undo button
@@ -489,11 +477,11 @@ extension DrawingViewController {
 	}
 	
 	@objc fileprivate func clearButtonTapped() {
-		let alert = UIAlertController(title: "Are you sure?", message: "It's will clear the canvas", preferredStyle: .actionSheet)
+		let alert = UIAlertController(title: "Clearing canvas", message: "Are you sure?", preferredStyle: .actionSheet)
 		let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
 			self.canvas.deleteAllLines()
 		}
-		let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
+		let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
 		alert.addAction(yesAction)
 		alert.addAction(noAction)
 		self.present(alert, animated: true, completion: nil)

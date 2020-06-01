@@ -8,7 +8,7 @@
 
 import UIKit
 
-//model of drawing lines
+//MARK: Model of drawing lines
 struct Line {
 	
 	var color: CGColor
