@@ -12,14 +12,6 @@ In this little application you can make simple drawing, erase mistakes or press 
 
 
 
-<p align="center">
-    <img src="/img_samples/simpleCanvas_gif4.gif" height="400" align="left">
-    <img height="400" src="/img_samples/simpleCanvas_gif5.gif">
-    <img src="/img_samples/screenshot_1.PNG" height="400" align="right">
-</p> 
-
-
-
 ### Requirements
 - Xcode version 11.2.1+
 - Swift 5
@@ -34,8 +26,18 @@ In this little application you can make simple drawing, erase mistakes or press 
 - Clear all the canvas
 - Share you drafts with other apps
 - Save result to the album you want
+- Hide color and tool bars
 
 ### Features
 - UIKit
 - Core graphics
+
+
+
+<p align="center">
+    <img src="/img_samples/simpleCanvas_gif4.gif" height="400" align="left">
+    <img height="400" src="/img_samples/simpleCanvas_gif5.gif">
+    <img src="/img_samples/screenshot_1.PNG" height="400" align="right">
+</p> 
+
 
