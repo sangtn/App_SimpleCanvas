@@ -34,6 +34,7 @@ In this little application you can make simple drawing, erase mistakes or press 
 
 
 
+### More presentation
 <p align="center">
     <img src="/img_samples/simpleCanvas_gif4.gif" height="400" align="left">
     <img height="400" src="/img_samples/simpleCanvas_gif5.gif">
